@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import PostCard from "../PostCard/PostCard";
-import PostDetail from "../PostDetail/PostDetail";
 
 class PostList extends Component {
     state = {
@@ -27,22 +27,21 @@ class PostList extends Component {
 
     postClicked = (post) => {
         // console.log("Clicked", post);
-        this.setState({
-            selectedPost: post
-        })
+        // this.setState({
+        //     selectedPost: post
+        // })
+        // this.props.history.push("/about");
     }
 
     render() {
-        let content = <p>Select a Post</p>;
-        if(this.state.selectedPost !== null) {
-            content = 
-                <PostDetail post={this.state.selectedPost} />
-        }
         return (
             <div>
                 {/* <p>{this.props.isPaginated}</p> */}
-                {this.state.posts.map(post => <PostCard key={post.id} post={post} clicked={this.postClicked} />)}
-                {content}
+                {this.state.posts.map(post => 
+                    <Link to={`${this.props.match.url}/${post.id}`} key={post.id}>
+                        <PostCard post={post} clicked={this.postClicked} />
+                    </Link>
+                )}
             </div>
         )
     }
