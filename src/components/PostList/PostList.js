@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import PostCard from "../PostCard/PostCard";
 
@@ -27,7 +27,6 @@ class PostList extends Component {
     render() {
         return (
             <div>
-                {/* <p>{this.props.isPaginated}</p> */}
                 {this.state.posts.map(post => 
                     <Link to={`${this.props.match.url}/${post.id}`} key={post.id}>
                         <PostCard post={post} />
@@ -38,4 +37,4 @@ class PostList extends Component {
     }
 }
 
-export default PostList;
+export default withRouter(PostList);
